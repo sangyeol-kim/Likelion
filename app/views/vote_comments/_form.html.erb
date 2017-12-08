@@ -1,0 +1,17 @@
+<div class="d-flex flex-column">
+  <nav aria-label="Page navigation" class="align-self-center">
+    <%= paginate @vote_comments %>
+  </nav>
+</div>
+
+<div id="comments_form_<%=vote_comment.link.id%>">
+  <%= form_with(model: [vote_comment.link, vote_comment], label: false) do |f| %>
+    <div class='form-inputs'>
+      <%= f.text_area :body, class: "form-control", rows: "3", placeholder: '마음의 상처를 입히는 댓글은 피해주세요..ㅠ_ㅠ' %>
+      <% f.number_field :user_id %>
+    </div>
+    <div class="form-actions" align="right" style="margin-top: 20px;">
+      <%= f.button :댓글작성, class: "btn btn-info" %>
+    </div>
+  <% end %>
+</div>

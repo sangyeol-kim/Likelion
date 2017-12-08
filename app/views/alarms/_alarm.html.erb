@@ -1,0 +1,8 @@
+<div id="alarm">
+  <div class="close">닫기</div>
+  <p>
+    <%= message.body %><br>
+    <%= message.user.nickname %>님에게 쪽지가 도착했습니다.
+  </p>
+  <p><%= link_to '쪽지 보기', conversation_path(message.conversation) %></p>
+</div>

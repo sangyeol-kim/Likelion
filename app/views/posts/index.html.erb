@@ -1,0 +1,94 @@
+<% if mobile? %>
+<div class="board_mobile" style="background: url('/img/title_img_1.jpg') no-repeat center center/cover scroll;"><span style="color: white; background:rgba(0,0,0,0.6); padding: 10px; border-radius: 10px;"><%= link_to "#{@bulletin.title}", "/bulletins/#{@bulletin.id}/posts", class: "board_title" %></span></div>
+<% else %>
+<div class="board" style="background: url('/img/title_img_1.jpg') no-repeat center center/cover scroll;"><span style="color: white; background:rgba(0,0,0,0.6); padding: 10px; border-radius: 10px;"><%= link_to "#{@bulletin.title}", "/bulletins/#{@bulletin.id}/posts", class: "board_title" %></span></div>
+<% end %>
+
+<% #경고메세지 출력 (아이디, 비밀번호 잘못 칠 시 등등...) %>
+<% if alert %>
+    <div class="alert alert-danger tlert-dismissible fade show text-center" style="padding: 10px; background-color: #FF4B5C; color: white; border-radius: 0; margin-bottom: 0; border: 0">
+    <%= alert %>
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    <% elsif notice %>
+    <div class="alert alert-danger tlert-dismissible fade show text-center" style="padding: 10px; background-color: #43AC6A; color: white; border-radius: 0; margin-bottom: 0; border: 0">
+    <%= notice %>
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+<% end %>
+
+<div class="container" style="margin-top:30px; margin-bottom: 100px;">
+<span class="badge badge-pill badge-success"><i class="fa fa-clock-o" aria-hidden="true"></i> 현재 시간 </span> <span><%= Time.zone.now.strftime('%Y-%m-%d %H:%M:%S') %></span><br/><br/>
+
+<div class="row hidden-xs-down">
+<div style="padding: 10px 10px 10px 10px; border-bottom: 3px solid #D5D5D5; background: #EFEFEF;" class="col-1 col-sm-1 col-md-1 hidden-sm-down" align="center">No.</div>
+<div style="padding: 10px 10px 10px 10px; border-bottom: 3px solid #D5D5D5; background: #EFEFEF;" class="col-3 col-sm-2 col-md-2" align="center">작성자</div>
+<div style="padding: 10px 10px 10px 10px; border-bottom: 3px solid #D5D5D5; background: #EFEFEF;" class="col-4 col-sm-5 col-md-5" align="center">제목</div>
+<div style="padding: 10px 10px 10px 10px; border-bottom: 3px solid #D5D5D5; background: #EFEFEF;" class="col-5 col-sm-3 col-md-2" align="center">작성시간</div>
+<div style="padding: 10px 10px 10px 10px; border-bottom: 3px solid #D5D5D5; background: #EFEFEF;" class="col-5 col-sm-2 col-md-1" align="center">조회수</div>
+<div style="padding: 10px 10px 10px 10px; border-bottom: 3px solid #D5D5D5; background: #EFEFEF;" class="col-5 col-sm-2 col-md-1 hidden-sm-down" align="center">좋아욧!</div>
+</div>
+<% if @posts.empty? %>
+    <h2 class="text-center" style="margin-top: 30px;">게시글이 없습니다...</h2>
+<% else %>
+    <div style="margin-top: 5px;"></div>
+    <div style="border-bottom: 2px solid gray;" class="row col-13 hidden-sm-up"></div>
+    <% @posts.each do |post| %>
+    <div class="row" bgcolor="white" onMouseOver="this.style.backgroundColor='#ECECEC'" onMouseOut="this.style.backgroundColor='#FFFFFF'">
+        <% # [글 번호] 그리드 설정 : PC Only %>
+        <div align="center" style="padding: 10px 10px 10px 10px; border-bottom: 1px solid gray;" class="col-1 col-sm-1 col-md-1 text-left text-sm-center hidden-sm-down"><%= post.id %></div>
+        
+        <% # [닉네임] 그리드 설정 : PC %>
+        <div align="left" style="padding: 10px 10px 10px 10px; border-bottom: 1px solid gray;" class="col-sm-2 col-md-2 hidden-xs-down board_nickname_etc"> <%= post.user != nil ? post.user.nickname : post.user_name %></div>
+        
+        <% # [게시글 제목] 그리드 설정 : PC %>
+        <div align="left" style="padding: 10px 10px 10px 10px; border-bottom: 1px solid gray;" class="col-sm-4 col-md-4 hidden-xs-down">
+        <% if post.reports.size >= post.num %>
+        <font color="#6E6E6E"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> 블라인드 된 게시글입니다.</font>
+        <% else %>
+            <%= link_to bulletin_post_path(post.bulletin, post) do %>
+                <%= content_tag(:div, post.title, class: "board_title_etc") %>
+            <% end %>
+        <% end %>
+        </div>
+        
+        <% # [게시글 제목] 그리드 설정 : 모바일 %>
+        <div align="left" style="padding: 10px 10px 10px 10px; border-bottom: 1px solid gray;" class="col-6 hidden-sm-up">
+        <% if post.reports.size >= post.num %>
+        <font color="#6E6E6E"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> 블라인드 된 게시글입니다.</font>
+        <% else %>
+            <%= link_to bulletin_post_path(post.bulletin, post) do %>
+                <%= content_tag(:div, post.title, class: "board_title_etc") %>
+            <% end %>
+        <% end %>
+        </div>
+        
+        <% # [댓글 카운트] 그리드 설정 : 모바일 %>
+        <div align="left" style="padding: 10px 10px 10px 10px; border-bottom: 1px solid gray;" class="col-1 hidden-sm-up">(<b><%= post.comments.count %></b>)</div>
+        
+        <% # [댓글 카운트] 그리드 설정 : PC %>
+        <div align="right" style="padding: 10px 10px 10px 10px; border-bottom: 1px solid gray;" class="col-sm-1 col-md-1 hidden-xs-down">(<b><%= post.comments.count %></b>)</div>
+        
+        <% # [닉네임]  그리드 설정 : 모바일 %>
+        <div align="center" style="padding: 10px 10px 10px 10px; border-bottom: 1px solid gray;" class="col-3 hidden-sm-up board_nickname_etc"><%= post.user != nil ? post.user.nickname : post.user_name %></div>
+        
+        <% # 시간 (PC / 모바일 공통) %>
+        <div align="center" style="padding: 10px 10px 10px 10px; border-bottom: 1px solid gray;" class="col-4 col-sm-3 col-md-2 hidden-xs-down"><%= "#{time_ago_in_words(post.created_at)} 전" %></div>
+        
+        <% # 조회수 (PC / 모바일 공통) %>
+        <div align="center" style="padding: 10px 10px 10px 10px; border-bottom: 1px solid gray;" class="col-3 col-sm-2 col-md-1 hidden-xs-down"><%= "#{post.unique_impression_count}" %></div>
+        
+        <% # [좋아요] 그리드 설정 : PC, 태블릿 크기 사이즈 X %>
+        <div align="center" style="padding: 10px 10px 10px 10px; border-bottom: 1px solid gray;" class="col-md-1 hidden-sm-down"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> <%= post.goods.size %></div>
+        
+        <% # [좋아요] 그리드 설정 : 모바일 %>
+        <div align="left" style="padding: 10px 10px 10px 10px; border-bottom: 1px solid gray;" class="col-2 hidden-sm-up"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> <%= post.goods.size %></div>
+    </div>
+    <% end %>
+<% end %>
+<br/>
+<div align="right"><%= link_to "글 쓰기", new_bulletin_post_path(@bulletin), class: "btn btn-primary", style: "margin-top: -10px;" %></div>
+<div class="d-flex flex-column", style="margin-bottom: 100px;">
+  <%= paginate @posts, class: "text-center" %>
+</div>
+</div>

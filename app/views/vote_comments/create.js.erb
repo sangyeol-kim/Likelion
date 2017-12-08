@@ -1,0 +1,6 @@
+<% if @vote_comment.errors.size == 0 %>
+  $('<%=j render @vote_comment %>').appendTo($("#vote_comments_link_<%=@link.id %>")).hide().fadeIn('fast');
+  $("#vote_comments_form_<%=@link.id %> form")[0].reset();
+<% else %>
+  alert("댓글을 작성해주세요..");
+<% end %>

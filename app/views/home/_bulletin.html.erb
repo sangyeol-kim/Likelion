@@ -1,0 +1,9 @@
+<% if bulletin.empty? %>
+    <h3 style="margin-top: 150px;">아직 개설된 게시판이 없습니다..</h3>
+<% else %>
+    <!-- 게시판 -->
+      <% bulletin.each do |b| %>
+          <%= render 'posts', title: b.title, posts: b.posts %>
+          <div class="col-1 col-md-1"></div>
+      <% end %>
+<% end %>

@@ -1,0 +1,19 @@
+<body class="login">
+<div class="container" align="center" style="margin-top: 200px;margin-bottom: 180px; color: white">
+
+<h2><%= t('.resend_confirmation_instructions') %></h2><br/>
+
+<%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+  <div class="col-12 col-sm-8 col-md-6">
+    <%= devise_error_messages! %>
+  </div>
+  
+  <div class="field col-12 col-sm-8 col-md-5" align="left">
+    <%= f.label :email %>
+    <%= f.email_field :email, class: "form-control", autofocus: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
+  </div><br/>
+<%= render "devise/shared/links" %> <%= f.submit t('.resend_confirmation_instructions'), class: "btn btn-warning" %>
+<% end %>
+
+</div>
+</body>

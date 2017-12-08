@@ -1,0 +1,9 @@
+<div class="row" bgcolor="white" onMouseOver="this.style.backgroundColor='#ECECEC'" onMouseOut="this.style.backgroundColor='#FFFFFF'">
+  <div align="center" style="padding: 10px 10px 10px 10px; border-bottom: 1px solid gray;" class="col-2 col-md-3 board_nickname_etc"><%= online_status conversation.with(current_user) %></div>
+  <div style="padding: 10px 10px 10px 10px; border-bottom: 1px solid gray;" class="col-7 col-md-7">
+    <%= link_to conversation_path(conversation) do %>
+      <%= content_tag(:div, conversation.personal_messages.last.body.truncate(50), class: "board_title_etc") %>
+    <% end %>
+    </div>
+  <div align="center" style="padding: 10px 10px 10px 10px; border-bottom: 1px solid gray;" class="col-3 col-md-2"><%= "#{time_ago_in_words(conversation.created_at)} 전" %></div>
+</div>

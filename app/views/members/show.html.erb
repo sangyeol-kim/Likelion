@@ -1,0 +1,4 @@
+<br><br><br><br><br><br><br><br>
+<% @users.each do |user| %>
+   <div class="user-row"><%= user.nickname %> <%= link_to '쪽지 보내기', talks_index_path, class: "btn btn-info" %></div>
+<% end %>

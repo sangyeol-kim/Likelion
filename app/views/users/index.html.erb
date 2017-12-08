@@ -1,0 +1,40 @@
+<div class="board" style="background: url('/img/title_img_4.jpg') no-repeat center center/cover scroll;"><span style="color: white; background:rgba(0,0,0,0.6); padding: 10px; border-radius: 10px;"><%= link_to '강대인들', '/users', class: "board_title" %></span></div>
+
+<% #경고메세지 출력 (아이디, 비밀번호 잘못 칠 시 등등...) %>
+<% if alert %>
+    <div class="alert alert-danger tlert-dismissible fade show text-center" style="padding: 10px; background-color: #FF4B5C; color: white; border-radius: 0; margin-bottom: 0; border: 0">
+    <%= alert %>
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    <% elsif notice %>
+    <div class="alert alert-danger tlert-dismissible fade show text-center" style="padding: 10px; background-color: #43AC6A; color: white; border-radius: 0; margin-bottom: 0; border: 0">
+    <%= notice %>
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+<% end %>
+
+    <div class="container">
+        <div class="row" style="margin-top: 30px;">
+            <div class="col-3 col-sm-5"><h2>강대인</h2></div>
+            <%= form_tag search_users_path, method: 'get', class: "ml-auto align-self-center d-flex flex-row" do %>
+            <%= text_field_tag :q, params[:q], class: "form-control col-5 col-md-7", data: {toggle: "tooltip", placement: "bottom"}, title: "닉네임을 입력하세요." %>
+            <%= submit_tag :검색, class: "btn btn-outline-success" %> <%= link_to '전체 목록', users_path, class: "btn btn-outline-info" if params[:q] %>
+            <% end %>
+        </div>
+        
+        <hr/>
+        <% if @users.empty? %>
+        <span align="center">
+        <h3>
+        OTL...
+        해당 유저가 없습니다...
+        </h3>
+        </span>
+        <% else %>
+        <div class="row"><%= render @users %></div>
+        <% end %>
+        <div style="margin-top: 30px; margin-bottom: 100px;" class="d-flex flex-column">
+            <%= paginate @users %>
+        </div>
+    </div>
+</div>

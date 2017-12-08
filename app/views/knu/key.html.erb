@@ -1,0 +1,50 @@
+<body class="potato">
+<div class="board" style="background: url('/img/title_img_3.jpg) no-repeat center center/cover scroll;"><span style="color: white; background:rgba(0,0,0,0.6); padding: 10px; border-radius: 10px;"><%= link_to "? ? ?", "/knu/knu_world", class: "board_title" %></span></div>
+<div style="margin-top: 30px;">
+<% #'김철민' 이스터에그 %>
+<% if @knu_key == "김철민" %>
+<div class="container">
+<div class="row" style="margin-top: 100px;">
+  <div class="col-sm-5"><%= image_tag "/img/secret/kcm_s.png" %></div>
+  <div class="col-sm-7" style="font-size: 20px;">
+    <span style="font-size: 30px;"><i style="margin-top: 25px;" class="fa fa-paper-plane" aria-hidden="true"></i> About Me</span><br/><br/>
+    - 이름 : 김철민<br/>
+    - 학교 : 강원대학교<br/>
+    - 학과 : 컴퓨터과학과<br/>
+    - 특징 : #오늘_뭐먹지, #귀차나, #게임프로그래머_희망자<br/>
+    - 한마디 : <b>위 베어 베어스</b> 만화는 사랑입니다.<br/>
+    - 블로그 : <%= link_to "네이버", 'http://blog.naver.com/kbs4674', target: "_blank", style: "color: #08b44d" %><br/>
+  </div>
+</div>
+</div>
+<div style="margin-top: 50px;"></div>
+
+<% #'강원대학교' 이스터에그 %>
+<% elsif @knu_key == "강원대학교" || @knu_key == "강원대" %>
+<div class="container">
+<table class="container" border="0" width="100%">
+    <tr>
+        <td align="center">
+            <iframe width="840" height="480" src="https://www.youtube.com/embed/uusrC7TPH4E" frameborder="0" allowfullscreen></iframe>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div style="float: right"><%= link_to "Secret Key 검색", "/knu/knu_world", class: "btn btn-primary", style: "margin-top: 40px;" %></div>
+            <div style="margin-top: 150px;"></div>
+        </td>
+    </tr>
+</table>
+</div>
+
+<% else %>
+<p align="center" style="color: white; background:rgba(0,0,0,0.6); padding: 10px; margin-top: 150px;">
+    <% @wise_ment.each do |t| %>
+    <%= t.html_safe %>
+    <% end %>
+<div class="container" align="right"><%= link_to "Secret Key 검색", "/knu/knu_world", class: "btn btn-primary", style: "margin-top: 40px;" %></div>
+<div style="margin-top: 150px;"></div>
+</p>
+</div>
+<% end %>
+</body>

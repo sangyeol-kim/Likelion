@@ -1,0 +1,22 @@
+<div class="col-12 col-md-5 main_board" style="margin-top: 30px;">
+  <span style="border-bottom: 2px solid gray; padding-bottom:10px;"><%= title %><span style="margin-left: 150px;">+</span></span>
+  <% if posts.empty? %>
+      <center><h3 style="margin-top: 50px; margin-bottom: 50px;">게시글이 없습니다..</h3></center>
+  <% end %>
+  <div style="margin-top: 15px;"></div>
+  <% posts.each do |p| %>
+      <% if user_signed_in? %>
+          <%= link_to bulletin_post_path(p.bulletin, p) do %>
+              <div class="col-md-10 board_title_etc" style="padding: 5px 5px 5px 5px;" bgcolor="white" onMouseOver="this.style.backgroundColor='#ECECEC'" onMouseOut="this.style.backgroundColor='#FFFFFF'">
+                <%= content_tag(:div, p.title) %>
+              </div>
+          <% end %>
+      <% else %>
+          <%= link_to "#{bulletin_path(p.bulletin)}/posts" do %>
+              <div class="col-md-10 board_title_etc" style="padding: 5px 5px 5px 5px" bgcolor="white" onMouseOver="this.style.backgroundColor='#ECECEC'" onMouseOut="this.style.backgroundColor='#FFFFFF'">
+                <%= content_tag(:div, p.title) %>
+              </div>
+          <% end %>
+      <% end %>
+  <% end %>
+</div>

@@ -1,0 +1,91 @@
+<div class="board" style="background: url('/img/title_img_2.jpg') no-repeat center center/cover scroll;"><span style="color: white; background:rgba(0,0,0,0.6); padding: 10px; border-radius: 10px;"><%= link_to ' Git!', '/home/git', class: "board_title fa fa-github-alt" %></span></div>
+    <div class="container" style="margin-top:30px; margin-bottom: 100px;">
+    <h1><i class="fa fa-github-alt" aria-hidden="true" style="margin-top: 30px;"></i> How to Use, Git ?</h1>
+    <p><kbd><b style="color: yellow">Git 최초 시작 시</b></kbd> 깃 저장소를 만들어낸다.</p>
+    <div class="bd-callout bd-callout-info">
+        git init
+    </div>
+    <p><i class="fa fa-gg-circle" aria-hidden="true" style="margin-top: 20px;"></i> Push : 우리의 작업을 Git 자료실에 자료를 저장시킴.</p>
+    <p>1. 우리의 작업에 대해 코딩 스크린샷 캡쳐(?)를 한다.</p>
+    <div class="bd-callout bd-callout-info">
+        git add .
+    </div>
+    <p>2. 우리의 작업을 Git 자료실에 올리기 이전, 메세지를 등록한다.</p>
+    <div class="bd-callout bd-callout-info">
+        git commit -m "내용"
+    </div>
+    <p><kbd><b style="color: yellow">첫 commit/pull이라면</b></kbd> 새로운 Git 원격접속 생성.</p>
+    <div class="bd-callout bd-callout-info">
+        git remote add origin https://github.com/kbs4674/Kangwon_community.git
+    </div>
+    <p>3. Git 자료실에 Push를 하여 지금 상태의 자료를 등록한다.<br/>(※참고로, 전에 있었다가 이번 작업으로 삭제된 자료가 있다면 그것 또한 적용되어, Git에서 해당 자료가 삭제된다.)</p>
+    <div class="bd-callout bd-callout-info">
+        git push -u origin master
+        <div class="bd-callout bd-callout-danger">
+           참고 : 강제 push하기 <br/>
+           > git push -u origin +master
+        </div>
+    </div>
+    
+    <p><i class="fa fa-gg-circle" aria-hidden="true" style="margin-top: 20px;"></i> Pull : 우리의 작업을 Git 자료실에서 가져옴</p>
+    <p><kbd><b style="color: yellow">시작 전</b></kbd> C9-Rails 튜토리얼로 작업 시 다음 명령어 작성 후 시작할 것.<br/>이 작업을 안하면 나중에 C9에서 Rails가 없어서 서버를 못 여는 등 골치아픈 일을 겪음.</p>
+    <div class="bd-callout bd-callout-info">
+        gem install rails --pre --no-ri --no-rdoc
+        <div class="bd-callout bd-callout-danger">
+           참고 : 레일즈 버전 변경을 원할 시 <br/>
+           > gem install rails --version="버전"
+        </div>
+    </div>
+    <p>다음 명령어를 입력</p>
+    <div class="bd-callout bd-callout-info">
+        git init<br/>
+        git pull https://github.com/kbs4674/Kangwon_community.git
+       <div class="bd-callout bd-callout-danger">
+           참고 : <kbd>The following untracked working tree files would be overwritten by merge</kbd> 에러가 나올 시 <br/>
+           > 명령어 입력창(터미널)에서 <kbd>git clean -d -fx ""</kbd> 입력
+        </div>
+    </div>
+    <p><kbd><b style="color: yellow">마무리</b></kbd> C9-Rails 튜토리얼로 작업 시 다음 명령어 작성 후 마무리.<br/>현재 rails 상태는 빈 깡통 상태라서 이 작업이 필요함.</p>
+    <div class="bd-callout bd-callout-info">
+        bundle install
+    </div>
+    
+    <p><i class="fa fa-gg-circle" aria-hidden="true" style="margin-top: 20px;"></i> 기타 명령어들</p>
+    <p>- git Push/Pull 시 아이디/암호를 묻지 않음.</p>
+    <div class="bd-callout bd-callout-info">
+        git config --global credential.helper 'cache --timeout 7200'
+    </div>
+    <p>- C9 캐쉬 삭제</p>
+    <div class="bd-callout bd-callout-info">
+        git rm --cached .c9/ -r
+    </div>
+    <p>- 현재 내 Git의 상태를 보여줌</p>
+    <div class="bd-callout bd-callout-info">
+        git status
+    </div>
+    <p>- Git Branch</p>
+    <div class="bd-callout bd-callout-info">
+        <kbd style="color: yellow">Branch 목록</kbd><br/>
+        git branch : Local의 Branch 목록을 봄.<br/>
+        git branch -r : 원격저장소(Git 사이트 내 저장소)의 Branch 목록을 봄.<br/>
+        gir branch -a : 모든 Branch 목록을 봄<br/><br/>
+        <kbd style="color: yellow">Branch 생성/변경/삭제</kbd><br/>
+        git branch -m 이름 new이름 : Branch 이름 변경.<br/>
+        git branch -d 이름 : Branch 삭제.<br/>
+        git branch 이름 : 새로운 Branch 생성<br/><br/>
+        <kbd style="color: yellow">Main Branch 변경</kbd><br/>
+        git checkout 이름 : 해당 Branch가 Main Branch가 된다.<br/>
+        git checkout -d 이름 : 새 Branch를 만들자마자 바로 해당 Branch가 Main Branch가 된다.<br/>
+    </div>
+    <p>- Master Branch에서 [현재 있는 Branch이름] Branch 작업내역을 Merge 합니다!</p>
+    <div class="bd-callout bd-callout-info">
+        git checkout master<br/>
+        git merge [현재 있는 Branch이름]
+    </div>
+    
+    
+    <h1><i class="fa fa-users" aria-hidden="true" style="margin-top: 30px;"></i> Team</h1>
+    <div class="bd-callout bd-callout-info">
+        김승한 / 이근식 / 서현석 / 김상열 / 김철민<br/>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+<div class="board" style="background: url('/img/title_img_4.jpg') no-repeat center center/cover scroll;"><span style="color: white; background:rgba(0,0,0,0.6); padding: 10px; border-radius: 10px;"><%= link_to '쪽지함', conversations_path, class: "board_title" %></span></div>
+
+<% #경고메세지 출력 (아이디, 비밀번호 잘못 칠 시 등등...) %>
+<% if alert %>
+    <div class="alert alert-danger tlert-dismissible fade show text-center" style="padding: 10px; background-color: #FF4B5C; color: white; border-radius: 0; margin-bottom: 0; border: 0">
+    <%= alert %>
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    <% elsif notice %>
+    <div class="alert alert-danger tlert-dismissible fade show text-center" style="padding: 10px; background-color: #43AC6A; color: white; border-radius: 0; margin-bottom: 0; border: 0">
+    <%= notice %>
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+<% end %>
+
+<div class="container" style="margin-bottom: 100px;">
+    <div class="row" style="margin-top: 30px;">
+        <div style="padding: 10px 10px 10px 10px; border-bottom: 3px solid #D5D5D5; background: #EFEFEF;" class="col-2 col-sm-2 col-md-3" align="center">보낸이</div>
+        <div style="padding: 10px 10px 10px 10px; border-bottom: 3px solid #D5D5D5; background: #EFEFEF;" class="col-7 col-sm-5 col-md-7" align="center">쪽지내용</div>
+        <div style="padding: 10px 10px 10px 10px; border-bottom: 3px solid #D5D5D5; background: #EFEFEF;" class="col-3 col-sm-3 col-md-2" align="center">최초 개설시간</div>
+    </div>
+
+    <div id="conversations">
+      <%= render @conversations %>
+    </div>
+</div>

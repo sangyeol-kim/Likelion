@@ -1,0 +1,5 @@
+<div id="comments_list_<%=@link.id%>", style="margin-top: 20px;">
+<% if @link.vote_comments.size > 0 %>
+  <%= render @vote_comments %>
+<% end %>
+</div>

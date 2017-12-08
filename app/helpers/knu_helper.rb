@@ -1,0 +1,2 @@
+module KnuHelper
+end

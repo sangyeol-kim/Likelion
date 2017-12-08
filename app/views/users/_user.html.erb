@@ -1,0 +1,27 @@
+<div style="margin-left: 20px; margin-top: 10px;" class="card col-md-5 col-sm-3 hidden-xs-down">
+  <div class="card-block">
+    <h3 class="card-title"><%= content_tag(:div, user.nickname, class: "card-user_nickname") %></h3>
+    <p class="card-text">한마디 : 
+    <% if user.description.empty? %>
+    <span style="color: blue">한마디를 적지 않으셨습니다.</span>
+    <% else %>
+    <%= user.description %>
+    <% end %>
+    </p>
+    <%= link_to '쪽지 보내기', new_personal_message_path(receiver_id: user), class: "btn btn-primary" %>
+  </div>
+</div>
+
+<div style="margin-left: 20px; margin-top: 10px;" class="card col-10 hidden-sm-up">
+  <div class="card-block">
+    <h3 class="card-title"><%= content_tag(:div, user.nickname, class: "card-user_nickname") %></h3>
+    <p class="card-text">한마디 : 
+    <% if user.description.empty? %>
+    <span style="color: blue">한마디를 적지 않으셨습니다.</span>
+    <% else %>
+    <%= user.description %>
+    <% end %>
+    </p>
+    <%= link_to '쪽지 보내기', new_personal_message_path(receiver_id: user), class: "btn btn-primary" %>
+  </div>
+</div>
